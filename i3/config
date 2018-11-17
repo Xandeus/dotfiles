@@ -17,7 +17,7 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango: DejaVu Sans Mono 8
+font pango: Source Code Pro Regular 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -29,8 +29,10 @@ font pango: DejaVu Sans Mono 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# take a screenshot
+bindsym --release Print exec deepin-screenshot
 # start a terminal
-bindsym $mod+Return exec gnome-terminal 
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -39,7 +41,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Escape exec i3lock
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec rofi -show run
+bindsym $mod+d exec rofi -show drun -show-icons -drun-icon-theme Paper-Mono-Dark -config $HOME/.cache/wal/colors-rofi-dark.rasi
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -51,6 +53,9 @@ bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
+# scratchpad 
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+Shift+plus scratchpad show
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -183,53 +188,22 @@ bindsym $mod+Pause mode "$mode_system"
 
 bindsym $mod+r mode "resize"
 
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 4
 gaps inner 10
 gaps outer 15
 
-exec i3lock -n -k -i ~/Dropbox/Photos/Wallpapers/syd_mead_02.png --insidecolor=894A5D33 --indpos="1645:412" --ringcolor=A3062544 --radius=150 --ring-width=4.5 --datecolor=60BDFFaa --timecolor=7C9EB2bb --timepos="1645:400" --datepos="1645:370" --keyhlcolor=D82448ff
+exec i3lock -n -k -i $HOME/Dropbox/Photos/Wallpapers/syd_mead_02.png --insidecolor=894A5D33 --indpos="1645:412" --ringcolor=A3062544 --radius=150 --ring-width=4.5 --datecolor=60BDFFaa --timecolor=7C9EB2bb --timepos="1645:400" --datepos="1645:370" --keyhlcolor=D82448ff
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
-exec dropbox
-exec ~/.config/i3/cycle_wallpaper.sh
-exec --no-startup-id compton
+exec --no-startup-id dropbox
 
-# tango dark
-set $darkblue 		#204A87
-set $darkbrown		#8F5902
-set $darkgreen 		#4E9A06
-set $darkmagenta 	#5C3566
-set $darkred 		#A40000
-set $darkyellow 	#C4A000
-set $darkorange		#CE5C00
-
-# tango light
-set $lightblue 		#729FCF
-set $lightbrown		#E9B96E
-set $lightgreen 	#8AE234
-set $lightmagenta 	#AD7FA8
-set $lightred 		#EF2929
-set $lightyellow 	#FCE94F
-set $lightorange	#FCAF3E
-
-# tango normal
-set $blue 			#3465A4
-set $brown			#C17D11
-set $green 			#73D216
-set $magenta 		#75507B
-set $red 			#CC0000
-set $yellow 		#EDD400
-set $orange			#F57900
-
-# tango mono
-set $black 			#555753
-set $grey			#BABDB6
-set $white 			#EEEEEC
-set $darkblack 		#2E3436
-set $darkgrey 		#888A85
-set $darkwhite 		#D3D7CF
+exec --no-startup-id compton --inactive-dim 0.3 --focus-exclude '_NET_WM_NAME@:s = "rofi"'
+exec --no-startup-id redshift -l 44:-93
+exec --no-startup-id $HOME/.config/i3/cycle_wallpaper.sh 
+for_window [class="Spotify"] floating enable
+for_window [class="Gimp"] floating enable
 # $i3-theme-window
 # tango jungle <clientclass> <border> <backg> <text> <indicator>
 #client.focused          $green $darkgreen $white $lightgreen
@@ -242,17 +216,31 @@ set $darkwhite 		#D3D7CF
 # from the generated scheme.
 # NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
 # it fails to get colors from Xresources.
-set_from_resource $fg i3wm.color7 #f0f0f0
-set_from_resource $bg i3wm.color2 #f0f0f0
-set_from_resource $hg i3wm.color9
+set_from_resource $cb i3wm.background #000000
+set_from_resource $cf i3wm.foreground #000000
+set_from_resource $c0 i3wm.color0 #000000
+set_from_resource $c1 i3wm.color1 #ff0000
+set_from_resource $c2 i3wm.color2 #00ff00 
+set_from_resource $c3 i3wm.color3 #000000
+set_from_resource $c4 i3wm.color4 #000000
+set_from_resource $c5 i3wm.color5 #000000
+set_from_resource $c6 i3wm.color6 #000000
+set_from_resource $c7 i3wm.color7 #000000
+set_from_resource $c8 i3wm.color8 #000000
+set_from_resource $c9 i3wm.color9 #000000
+set_from_resource $c10 i3wm.color10 #000000
+set_from_resource $c11 i3wm.color11 #000000
+set_from_resource $c12 i3wm.color12 #000000
+set_from_resource $c13 i3wm.color13 #000000
+set_from_resource $c14 i3wm.color14 #000000
 
 # class                 border  backgr. text indicator child_border
-client.focused          $hg     $bg     $fg  $bg       $bg
-client.focused_inactive $bg     $bg     $fg  $bg       $bg
-client.unfocused        $bg     $bg     $fg  $bg       $bg
-client.urgent           $bg     $bg     $fg  $bg       $bg
-client.placeholder      $bg     $bg     $fg  $bg       $bg
+client.focused          $c2     $cb     $cf  $c7       $c1
+client.focused_inactive $c2     $cb     $cf  $c6       $c2
+client.unfocused        $c2     $cb     $cf  $c6       $c3
+client.urgent           $c2     $cb     $cf  $c6       $c4
+client.placeholder      $c2     $cb     $cf  $c6       $c4
 
-client.background       $bg
+client.background       #ffffff
 
 

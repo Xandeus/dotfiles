@@ -1,10 +1,14 @@
 [colors]
-background = ${xrdb:color0:#222}
+background = ${xrdb:color0:#fff}
 foreground = ${xrdb:color7:#222}
-foreground-alt = ${xrdb:color7:#222}
+foreground-alt = ${xrdb:color8:#222}
 primary = ${xrdb:color1:#222}
 secondary = ${xrdb:color2:#222}
-alert = ${xrdb:color3:#222}
+alert = ${xrdb:color5:#222}
+
+color3 = ${xrdb:color3}
+color4 = ${xrdb:color4}
+light = ${xrdb:color6}
 
 [global/wm]
 margin-top = 5
@@ -13,40 +17,24 @@ margin-bottom = 5
 [settings]
 screenchange-reload = true
 
-[bar/bottom]
-modules-left =  
-modules-center = cpu memory temperature date 
-modules-right = menu filesystem i3 xwindow
-
-background = #00000000
-foreground = ${colors.foreground}
-
-bottom = false
+[bar/mybar]
 width = 100%
 height = 25
 offset-x = 0
 offset-y = 0
+;${colors.background}
 
-[bar/example]
-width = 100%
-height = 25
-offset-x = 0
-offset-y = 0
-
-;background = ${xrdb:color9}
-
-;background transparente
-;background = #ffffffff
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-verline-size = 0
+overline-size = 0
 overline-color = #f00
-underline-size = 2
-underline-color = #00ffff
 
-border-bottom-size = 1
-border-bottom-color = ${colors.primary}
+underline-size = 4
+underline-color = ${colors.primary}
+
+border-bottom-size = 3
+border-bottom-color = ${colors.secondary}
 
 padding-left = 0
 padding-right = 2
@@ -54,28 +42,36 @@ module-margin-left = 1
 module-margin-right = 2
 
 ;font-0 = Font Awesome 5 Free:style=Regular:pixelsize=8;1
-font-0 = Font Awesome 5 Free:size=10;0
-font-1 = unifont:size=6:heavy:fontformat=truetype;-2
-font-2 = siji:pixelsize=10;0
-font-3 = FontAwesome:size=11;-1
+font-0 = Font Awesome 5 Free:size=10:style=Regular;
+font-1 = Font Awesome 5 Free:size=15:style=Solid;2
+font-2 = Font Awesome 5 Brands:size=15:style=Regular;1
+font-3 = unifont:size=6:heavy:fontformat=truetype;-2
+font-4 = siji:pixelsize=10;0
+font-5 = FontAwesome:size=11;-1
 
 modules-left = i3 player-mpris-tail 
 modules-center = date 
-modules-right = filesystem memory battery updates-arch-combined
+modules-right = change-wallpaper filesystem memory battery updates-arch-combined
 
 tray-position = right
 tray-padding = 0
 ;tray-transparent = true
 
-;wm-restack = i3
+wm-restack = i3
 
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
 
 bottom = false
 
+[module/change-wallpaper]
+type = custom/script
+exec = echo $(basename "$(cat ~/.fehbg)") | tr -d "'"
+click-left = wal -a "85" -i $HOME/Dropbox/Photos/Wallpapers/ -g
+
 [module/system-gpu-intel]
 type = custom/script
+label = Hi
 exec = ~/polybar-scripts/system-gpu-intel.sh
 interval = 20
 
@@ -135,27 +131,28 @@ menu-3-0-exec = gvim &
 type = custom/script
 exec = ~/polybar-scripts/player-mpris-tail.py
 tail = true
-click-left = ~/polybar-scripts/player-ctl.sh previous
-click-right = ~/polybar-scripts/player-ctl.sh next
-click-middle = ~/polybar-scripts/player-ctlsh play-pause
+click-left = ~/polybar-scripts/player-ctl.sh next
+click-right = ~/polybar-scripts/player-ctl.sh play-pause
+click-middle = ~/polybar-scripts/player-ctlsh previous
 
 [module/filesystem]
 type = internal/fs
 interval = 0.5
 mount-0 = /
 
-label-mounted =  %mountpoint%: %percentage_free%
+label-mounted =  %mountpoint%: %percentage_free%%
 label-unmounted = %mountpoint%: not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/i3]
 
-ws-icon-0 = ♚
-ws-icon-1 = ♛
-ws-icon-2 = ♜
-ws-icon-3 = ♝
-ws-icon-4 = ♞
-ws-icon-default = ♟
+ws-icon-0 = 1
+ws-icon-1 = 2
+ws-icon-2 = 3
+ws-icon-3 = 4
+ws-icon-4 = 5
+ws-icon-5 = 6
+ws-icon-default 6 
 
 type = internal/i3
 format = <label-state> <label-mode>
@@ -165,22 +162,24 @@ wrapping-scroll = true
 strip-wsnumbers = true
 pin-workspaces = true
 
-label-mode-padding = 2
-label-mode-foreground = #0088CC
+label-focused = %index%
+label-mode-padding = 1
+label-mode-foreground = ${colors.foreground}
 
-label-unfocused-foreground = #555555
+label-unfocused-foreground = ${colors.secondary}
 label-unfocused-padding = 1
 
-label-visible-foregroud = #888888
+label-visible-foregroud = ${colors.secondary} 
 label-visible-padding = 1
 
-label-focused-foreground = #0088CC
+label-focused-foreground = ${colors.foreground}
 label-focused-padding = 2
 
+label-unfocused = %index%
 label-urgent-padding = 1
 
-label-dimmed-underline = ${BAR.background}
-label-focused-underline = #0088CC
+label-dimmed-underline = ${colors.light}
+label-focused-underline = $(colors.light)
 
 [module/cpu]
 type = internal/cpu
@@ -214,18 +213,18 @@ label = RAM [%gb_used%]
 
 bar-used-width = 10
 bar-used-gradient = true
-bar-used-foreground-0 = #0088CC
-bar-used-foreground-1 = #2f8419
-bar-used-foreground-2 = #f5a70a
-bar-used-foreground-3 = #ed5456
+bar-used-foreground-0 = ${colors.secondary}
+bar-used-foreground-1 = ${colors.color3}
+bar-used-foreground-2 = ${colors.color4}
+bar-used-foreground-3 = #ff0
 bar-used-indicator = █
 bar-used-indicator-font = 3
-bar-used-indicator-foreground = #fff
+bar-used-indicator-foreground = ${colors.light}
 bar-used-fill = █
 bar-used-fill-font = 3
 bar-used-empty = █
 bar-used-empty-font = 3
-bar-used-empty-foreground = #44
+bar-used-empty-foreground = ${colors.primary}
 
 [module/eth]
 type = internal/network
@@ -264,8 +263,8 @@ time = %H:%M:%S
 time-alt = %H:%M:%S
 
 format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.secondary}
+format-prefix-foreground = ${colors.foreground}
+format-underline = ${colors.primary}
 
 label = %date% %time%
 
@@ -349,7 +348,7 @@ format-discharging = <ramp-capacity> <label-discharging>
 ;   %percentage% (default)
 ;   %time%
 ;   %consumption% (shows current charge rate in watts)
-label-charging = Charging %percentage%%
+label-charging = %percentage%%
 
 ; Available tokens:
 ;   %percentage% (default)
@@ -359,7 +358,7 @@ label-discharging = %time% %percentage%%
 
 ; Available tokens:
 ;   %percentage% (default)
-label-full = Fully charged
+label-full = 
 
 ; Only applies if <ramp-capacity> is used
 ramp-capacity-0 = 

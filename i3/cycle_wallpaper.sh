@@ -1,7 +1,7 @@
 #!/bin/bash
 
 while true
-do feh --randomize --bg-fill ~/Dropbox/Photos/Wallpapers/*
+do wal -a "85" -i $HOME/Dropbox/Photos/Wallpapers/ -g
 sleep 30m
 done
 
