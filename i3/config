@@ -199,7 +199,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id dropbox
 
-exec --no-startup-id compton --inactive-dim 0.3 --focus-exclude '_NET_WM_NAME@:s = "rofi"'
+exec --no-startup-id compton 
 exec --no-startup-id redshift -l 44:-93
 exec --no-startup-id $HOME/.config/i3/cycle_wallpaper.sh 
 for_window [class="Spotify"] floating enable
