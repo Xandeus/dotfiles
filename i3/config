@@ -191,8 +191,7 @@ bindsym $mod+r mode "resize"
 for_window [class="^.*"] border pixel 4
 gaps inner 10
 gaps outer 15
-
-exec i3lock -n -k -i $HOME/Dropbox/Photos/Wallpapers/syd_mead_02.png --insidecolor=894A5D33 --indpos="1645:412" --ringcolor=A3062544 --radius=150 --ring-width=4.5 --datecolor=60BDFFaa --timecolor=7C9EB2bb --timepos="1645:400" --datepos="1645:370" --keyhlcolor=D82448ff
+exec i3lock -n -k --bar-indicator --bar-base-width 5 --bar-width 15 --keyhlcolor 264363aa -i $HOME/Dropbox/Photos/Wallpapers/NyOoWOg.jpg --bar-step 300 --bar-max-height 300 --bar-color 264363aa -k --datecolor d0601e99 --timecolor e1cab299 --datepos 960:1000 --timepos 960:1050 --indpos 960:50 --verifcolor d0601e99
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id nm-applet
@@ -205,6 +204,8 @@ exec --no-startup-id $HOME/.config/i3/cycle_wallpaper.sh
 for_window [class="Spotify"] floating enable
 for_window [class="Gimp"] floating enable
 for_window [class="Playground"] floating enable
+for_window [class="Matplotlib"] floating enable
+for_window [class="XMgrace"] floating enable
 # $i3-theme-window
 # tango jungle <clientclass> <border> <backg> <text> <indicator>
 #client.focused          $green $darkgreen $white $lightgreen
