@@ -1,5 +1,5 @@
 [colors]
-background = ${xrdb:color0:#fff}
+background = #cc222222
 foreground = ${xrdb:color7:#222}
 foreground-alt = ${xrdb:color8:#222}
 primary = ${xrdb:color1:#222}
@@ -11,69 +11,85 @@ color4 = ${xrdb:color4}
 light = ${xrdb:color6}
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
+margin-top = 0
+margin-bottom = 0
 
 [settings]
 screenchange-reload = true
 
 [bar/mybar]
-width = 100%
-height = 25
-offset-x = 0
-offset-y = 0
+width = 60%
+height = 26
+offset-x = 20%
+offset-y = 5
+
 ;${colors.background}
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-overline-size = 0
-overline-color = #f00
-
+overline-size = 4
+overline-color = ${colors.primary}
 underline-size = 4
 underline-color = ${colors.primary}
 
-border-bottom-size = 3
 border-bottom-color = ${colors.secondary}
-
 padding-left = 0
-padding-right = 2
-module-margin-left = 1
-module-margin-right = 2
+padding-right = 0
+module-margin-left = 0
+module-margin-right = 5
 
 ;font-0 = Font Awesome 5 Free:style=Regular:pixelsize=8;1
-font-0 = Font Awesome 5 Free:size=10:style=Regular;
-font-1 = Font Awesome 5 Free:size=15:style=Solid;2
-font-2 = Font Awesome 5 Brands:size=15:style=Regular;1
-font-3 = unifont:size=6:heavy:fontformat=truetype;-2
+;font-0 = Font Awesome 5 Free:size=8:style=Bold;
+font-0 = SF Pro Display:size=10:style=Medium;0
+font-1 = Font Awesome 5 Free:size=8:style=Solid;0
+font-2 = Font Awesome 5 Brands:size=8:style=Regular;1
 font-4 = siji:pixelsize=10;0
-font-5 = FontAwesome:size=11;-1
+font-5 = FontAwesome:size=12;0
 
 modules-left = i3 player-mpris-tail 
 modules-center = date 
-modules-right = change-wallpaper filesystem memory battery updates-arch-combined
-
-tray-position = right
-tray-padding = 0
+modules-right = change-wallpaper filesystem battery updates-arch-combined network
+spacing = 0
+tray-position = none 
+tray-padding = 1
+tray-maxsize = 12
+tray-offset- = 10
+tray-background = #55000000
 ;tray-transparent = true
-
-wm-restack = i3
 
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
 
 bottom = false
+override-redirect = true
 
 [module/change-wallpaper]
 type = custom/script
 exec = echo $(basename "$(cat ~/.fehbg)") | tr -d "'"
 click-left = wal -a "85" -i $HOME/Dropbox/Photos/Wallpapers/ -g
 
-[module/system-gpu-intel]
-type = custom/script
-label = Hi
-exec = ~/polybar-scripts/system-gpu-intel.sh
-interval = 20
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+format = <ramp> <label>
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = #66c6b8e6
+
+[module/network]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+format-connected-padding = 1
+format-disconnected-padding = 1
+
+format-connected = <label-connected>
+
+label-connected = %{A1:nm-connection-editor:} %essid% %{A}
+label-disconnected = %{A1:nm-connection-editor:}  %{A}
+label-disconnected-foreground = ${colors.secondary}
 
 [module/xwindow]
 type = internal/xwindow
@@ -140,7 +156,7 @@ type = internal/fs
 interval = 0.5
 mount-0 = /
 
-label-mounted =  %mountpoint%: %percentage_free%%
+label-mounted =  %percentage_free%%
 label-unmounted = %mountpoint%: not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 

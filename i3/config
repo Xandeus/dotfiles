@@ -37,8 +37,9 @@ bindsym $mod+Return exec urxvt
 # kill focused window
 bindsym $mod+Shift+q kill
 
+set $Locker $HOME/betterlockscreen/betterlockscreen -l dim
 # lock screen
-bindsym $mod+Escape exec i3lock
+bindsym $mod+Escape exec $Locker
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec rofi -show drun -show-icons -drun-icon-theme Paper-Mono-Dark -config $HOME/.cache/wal/colors-rofi-dark.rasi
@@ -88,6 +89,9 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
+# Open specific scratchpads
+bindsym $mod+q [class="Spotify"] scratchpad show
+
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
@@ -98,7 +102,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+# bindsym $mod+d focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -169,14 +173,13 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
-set $Locker i3lock && sleep 1
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
 
@@ -188,12 +191,10 @@ bindsym $mod+Pause mode "$mode_system"
 
 bindsym $mod+r mode "resize"
 
-for_window [class="^.*"] border pixel 4
+for_window [class="^.*"] border pixel 2
 gaps inner 10
-gaps outer 15
-exec i3lock -n -k --bar-indicator --bar-base-width 5 --bar-width 15 --keyhlcolor 264363aa -i $HOME/Dropbox/Photos/Wallpapers/NyOoWOg.jpg --bar-step 300 --bar-max-height 300 --bar-color 264363aa -k --datecolor d0601e99 --timecolor e1cab299 --datepos 960:1000 --timepos 960:1050 --indpos 960:50 --verifcolor d0601e99
+gaps outer 25
 
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id dropbox
@@ -201,11 +202,15 @@ exec --no-startup-id dropbox
 exec --no-startup-id compton 
 exec --no-startup-id redshift -l 44:-93
 exec --no-startup-id $HOME/.config/i3/cycle_wallpaper.sh 
+exec --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id $Locker
+
 for_window [class="Spotify"] floating enable
 for_window [class="Gimp"] floating enable
 for_window [class="Playground"] floating enable
 for_window [class="Matplotlib"] floating enable
 for_window [class="XMgrace"] floating enable
+for_window [class="nm-connection-editor"] floating enable
 # $i3-theme-window
 # tango jungle <clientclass> <border> <backg> <text> <indicator>
 #client.focused          $green $darkgreen $white $lightgreen
