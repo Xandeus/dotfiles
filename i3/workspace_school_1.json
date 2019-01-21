@@ -1,0 +1,81 @@
+{
+    "border": "pixel",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1006,
+       "width": 1846,
+       "x": 0,
+       "y": 0
+    },
+    "name": "Google Calendar - January 2019 - Mozilla Firefox",
+    "percent": 0.5,
+    "swallows": [
+       {
+        "class": "^Firefox$",
+        "instance": "^Navigator$",
+        "window_role": "^browser$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.5,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "normal",
+            "floating": "auto_off",
+            "layout": "splith",
+            "percent": 0.8,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 436,
+                       "width": 644,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "name": "alex@archlinux:~",
+                    "percent": null,
+                    "swallows": [
+                       {
+                        "class": "^URxvt$",
+                        "instance": "^urxvt$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 436,
+               "width": 644,
+               "x": 0,
+               "y": 0
+            },
+            "name": "alex@archlinux:~",
+            "percent": 0.2,
+            "swallows": [
+               {
+                "class": "^URxvt$",
+                "instance": "^urxvt$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+

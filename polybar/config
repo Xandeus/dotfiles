@@ -1,5 +1,5 @@
 [colors]
-background = #cc222222
+background =  ${xrdb:polybar_background:#222}
 foreground = ${xrdb:color7:#222}
 foreground-alt = ${xrdb:color8:#222}
 primary = ${xrdb:color1:#222}
@@ -68,6 +68,7 @@ override-redirect = true
 type = custom/script
 exec = echo $(basename "$(cat ~/.fehbg)") | tr -d "'"
 click-left = wal -a "85" -i $HOME/Dropbox/Photos/Wallpapers/ -g
+format-underline = ${colors.primary}
 
 [module/backlight]
 type = internal/backlight
@@ -84,6 +85,7 @@ interface = wlp2s0
 interval = 3.0
 format-connected-padding = 1
 format-disconnected-padding = 1
+format-underline = ${colors.primary}
 
 format-connected = <label-connected>
 
@@ -155,6 +157,7 @@ click-middle = ~/polybar-scripts/player-ctlsh previous
 type = internal/fs
 interval = 0.5
 mount-0 = /
+format-underline = ${colors.primary}
 
 label-mounted =  %percentage_free%%
 label-unmounted = %mountpoint%: not mounted
@@ -168,7 +171,7 @@ ws-icon-2 = 3
 ws-icon-3 = 4
 ws-icon-4 = 5
 ws-icon-5 = 6
-ws-icon-default 6 
+ws-icon-default = 6 
 
 type = internal/i3
 format = <label-state> <label-mode>
@@ -224,6 +227,7 @@ ramp-coreload-3-foreground = #0088CC
 [module/memory]
 type = internal/memory
 format = <label> <bar-used>
+format-underline = ${colors.primary}
 label = RAM [%gb_used%] 
 ;label-foreground = #0088CC
 
@@ -340,6 +344,7 @@ poll-interval = 5
 ; Default: %H:%M:%S
 time-format = %H:%M
 
+format-underline = ${colors.primary}
 ; Available tags:
 ;   <label-charging> (default)
 ;   <bar-capacity>
@@ -455,5 +460,5 @@ menu-2-1-exec = menu-open-0
 type = custom/script
 exec = ~/polybar-scripts/updates-arch-combined.sh
 interval = 600
-
+format-underline = ${colors.primary}
 ; vim:ft=dosini

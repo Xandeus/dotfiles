@@ -191,10 +191,14 @@ bindsym $mod+Pause mode "$mode_system"
 
 bindsym $mod+r mode "resize"
 
+bindsym $mod+g exec ~/.config/i3/load_work_layout.sh
+bindsym $mod+t exec ~/.config/i3/load_school_layout.sh
+
 for_window [class="^.*"] border pixel 2
 gaps inner 10
 gaps outer 25
 
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id dropbox
@@ -202,7 +206,6 @@ exec --no-startup-id dropbox
 exec --no-startup-id compton 
 exec --no-startup-id redshift -l 44:-93
 exec --no-startup-id $HOME/.config/i3/cycle_wallpaper.sh 
-exec --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id $Locker
 
 for_window [class="Spotify"] floating enable

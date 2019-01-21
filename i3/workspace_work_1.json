@@ -1,0 +1,93 @@
+{
+    "border": "pixel",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1006,
+       "width": 1846,
+       "x": 0,
+       "y": 0
+    },
+    "name": "i3 - ArchWiki - Mozilla Firefox",
+    "percent": 1,
+    "swallows": [
+       {
+        "class": "^Firefox$",
+        "instance": "^Navigator$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splith",
+    "percent": null,
+    "rect": {
+       "height": 440,
+       "width": 648,
+       "x": 1235,
+       "y": 529
+    },
+    "type": "floating_con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 2,
+            "floating": "user_on",
+            "geometry": {
+               "height": 436,
+               "width": 644,
+               "x": 0,
+               "y": 0
+            },
+            "name": "alex@archlinux:~",
+            "percent": 1,
+            "swallows": [
+               {
+                "class": "^URxvt$",
+                "instance": "^urxvt$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splith",
+    "percent": null,
+    "rect": {
+       "height": 440,
+       "width": 648,
+       "x": 1237,
+       "y": 35
+    },
+    "type": "floating_con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 2,
+            "floating": "user_on",
+            "geometry": {
+               "height": 436,
+               "width": 644,
+               "x": 0,
+               "y": 0
+            },
+            "name": "alex@archlinux:~",
+            "percent": 1,
+            "swallows": [
+               {
+                "class": "^URxvt$",
+                "instance": "^urxvt$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
