@@ -1,5 +1,5 @@
 [colors]
-background =  ${xrdb:polybar_background:#222}
+background =  ${xrdb:polybar_background:#f00}
 foreground = ${xrdb:color7:#222}
 foreground-alt = ${xrdb:color8:#222}
 primary = ${xrdb:color1:#222}
@@ -22,7 +22,7 @@ width = 60%
 height = 26
 offset-x = 20%
 offset-y = 5
-
+enable-ipc = true
 ;${colors.background}
 
 background = ${colors.background}
@@ -30,12 +30,12 @@ foreground = ${colors.foreground}
 
 overline-size = 4
 overline-color = ${colors.primary}
-underline-size = 4
+underline-size = 3
 underline-color = ${colors.primary}
 
 border-bottom-color = ${colors.secondary}
-padding-left = 0
-padding-right = 0
+padding-left = 10
+padding-right = 10
 module-margin-left = 0
 module-margin-right = 5
 
@@ -46,10 +46,11 @@ font-1 = Font Awesome 5 Free:size=8:style=Solid;0
 font-2 = Font Awesome 5 Brands:size=8:style=Regular;1
 font-4 = siji:pixelsize=10;0
 font-5 = FontAwesome:size=12;0
+font-6 = Material Icons:size=12
 
-modules-left = i3 player-mpris-tail 
+modules-left = i3 player-mpris-tail network 
 modules-center = date 
-modules-right = change-wallpaper filesystem battery updates-arch-combined network
+modules-right = change-wallpaper filesystem battery updates-arch-combined 
 spacing = 0
 tray-position = none 
 tray-padding = 1
@@ -67,7 +68,7 @@ override-redirect = true
 [module/change-wallpaper]
 type = custom/script
 exec = echo $(basename "$(cat ~/.fehbg)") | tr -d "'"
-click-left = wal -a "85" -i $HOME/Dropbox/Photos/Wallpapers/ -g
+click-left = wal -a "85" -i $HOME/Dropbox/Photos/Wallpapers/ 
 format-underline = ${colors.primary}
 
 [module/backlight]
@@ -83,13 +84,14 @@ ramp-foreground = #66c6b8e6
 type = internal/network
 interface = wlp2s0
 interval = 3.0
+format-connected-underline = ${colors.primary}
+format-disconnected-connected-underline = ${colors.primary}
 format-connected-padding = 1
 format-disconnected-padding = 1
-format-underline = ${colors.primary}
 
 format-connected = <label-connected>
 
-label-connected = %{A1:nm-connection-editor:} %essid% %{A}
+label-connected = %{A1:nm-connection-editor:} %essid%  %upspeed% %downspeed%%{A}
 label-disconnected = %{A1:nm-connection-editor:}  %{A}
 label-disconnected-foreground = ${colors.secondary}
 
@@ -171,7 +173,8 @@ ws-icon-2 = 3
 ws-icon-3 = 4
 ws-icon-4 = 5
 ws-icon-5 = 6
-ws-icon-default = 6 
+;ws-icon-default = 
+
 
 type = internal/i3
 format = <label-state> <label-mode>

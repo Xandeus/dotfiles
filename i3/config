@@ -33,6 +33,9 @@ floating_modifier $mod
 bindsym --release Print exec deepin-screenshot
 # start a terminal
 bindsym $mod+Return exec urxvt
+bindsym $mod+Shift+Return exec urxvt -name "floating" 
+for_window [instance="floating"] floating enable
+
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -40,6 +43,7 @@ bindsym $mod+Shift+q kill
 set $Locker $HOME/betterlockscreen/betterlockscreen -l dim
 # lock screen
 bindsym $mod+Escape exec $Locker
+bindsym $mod+c exec setwal
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec rofi -show drun -show-icons -drun-icon-theme Paper-Mono-Dark -config $HOME/.cache/wal/colors-rofi-dark.rasi
@@ -172,7 +176,16 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
+mode "moveit" {
+    bindsym j move left 20px
+    bindsym k move down 20px
+    bindsym l move up 20px
+    bindsym semicolon move right 20px
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym Mod4+m mode "default"
+}
+bindsym Mod4+m focus floating; mode "moveit"
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -195,6 +208,7 @@ bindsym $mod+g exec ~/.config/i3/load_work_layout.sh
 bindsym $mod+t exec ~/.config/i3/load_school_layout.sh
 
 for_window [class="^.*"] border pixel 2
+
 gaps inner 10
 gaps outer 25
 
@@ -206,8 +220,7 @@ exec --no-startup-id dropbox
 exec --no-startup-id compton 
 exec --no-startup-id redshift -l 44:-93
 exec --no-startup-id $HOME/.config/i3/cycle_wallpaper.sh 
-exec --no-startup-id $Locker
-
+exec --no-startup-id xss-lock -- $HOME/betterlockscreen/betterlockscreen -l dim &
 for_window [class="Spotify"] floating enable
 for_window [class="Gimp"] floating enable
 for_window [class="Playground"] floating enable
