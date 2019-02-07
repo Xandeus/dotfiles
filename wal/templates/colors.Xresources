@@ -3,8 +3,8 @@
 *background:        {background}
 *.foreground:       {foreground}
 *.background:       {background}
-*.polybar_background: #aa{background.strip}
-*polybar_background: #aa{background.strip}
+*.polybar_background: #69{background.strip}
+*polybar_background: #69{background.strip}
 emacs*foreground:   {foreground}
 emacs*background:   {background}
 URxvt*foreground:   {foreground}

@@ -34,13 +34,12 @@ bindsym --release Print exec deepin-screenshot
 # start a terminal
 bindsym $mod+Return exec urxvt
 bindsym $mod+Shift+Return exec urxvt -name "floating" 
-for_window [instance="floating"] floating enable
 
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
-set $Locker $HOME/betterlockscreen/betterlockscreen -l dim
+set $Locker xset s activate
 # lock screen
 bindsym $mod+Escape exec $Locker
 bindsym $mod+c exec setwal
@@ -177,10 +176,10 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 mode "moveit" {
-    bindsym j move left 20px
-    bindsym k move down 20px
-    bindsym l move up 20px
-    bindsym semicolon move right 20px
+    bindsym j move left 100px
+    bindsym k move down 100px
+    bindsym l move up 100px
+    bindsym semicolon move right 100px
     bindsym Return mode "default"
     bindsym Escape mode "default"
     bindsym Mod4+m mode "default"
@@ -221,13 +220,16 @@ exec --no-startup-id compton
 exec --no-startup-id redshift -l 44:-93
 exec --no-startup-id $HOME/.config/i3/cycle_wallpaper.sh 
 exec --no-startup-id xss-lock -- $HOME/betterlockscreen/betterlockscreen -l dim &
+exec --no-startup-id exec $HOME/betterlockscreen/betterlockscreen -l dim &
 for_window [class="Spotify"] floating enable
 for_window [class="Gimp"] floating enable
 for_window [class="Playground"] floating enable
 for_window [class="Matplotlib"] floating enable
 for_window [class="XMgrace"] floating enable
-for_window [class="nm-connection-editor"] floating enable
-# $i3-theme-window
+for_window [class="URxvt" title="ranger"] floating enable
+for_window [instance="floating"] floating enable border pixel 0
+
+floating_minimum_size 800 x 400
 # tango jungle <clientclass> <border> <backg> <text> <indicator>
 #client.focused          $green $darkgreen $white $lightgreen
 #client.focused_inactive $darkgrey $black $grey $darkgrey
