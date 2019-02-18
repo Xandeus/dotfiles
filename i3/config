@@ -33,8 +33,8 @@ floating_modifier $mod
 bindsym --release Print exec deepin-screenshot
 # start a terminal
 bindsym $mod+Return exec urxvt
-bindsym $mod+Shift+Return exec urxvt -name "floating" 
-
+# start a floating notepad terminal
+bindsym $mod+Shift+Return exec urxvt -name "floating" -title "Notepad"
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -229,7 +229,7 @@ for_window [class="XMgrace"] floating enable
 for_window [class="URxvt" title="ranger"] floating enable
 for_window [instance="floating"] floating enable border pixel 0
 
-floating_minimum_size 800 x 400
+floating_minimum_size 850 x 400
 # tango jungle <clientclass> <border> <backg> <text> <indicator>
 #client.focused          $green $darkgreen $white $lightgreen
 #client.focused_inactive $darkgrey $black $grey $darkgrey
