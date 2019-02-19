@@ -149,11 +149,11 @@ menu-3-0-exec = gvim &
 
 [module/player-mpris-tail]
 type = custom/script
-exec = ~/polybar-scripts/player-mpris-tail.py
+exec = ~/.config/polybar/polybar-scripts/player-mpris-tail.py
 tail = true
-click-left = ~/polybar-scripts/player-ctl.sh next
-click-right = ~/polybar-scripts/player-ctl.sh play-pause
-click-middle = ~/polybar-scripts/player-ctlsh previous
+click-left = ~/.config/polybar/polybar-scripts/player-ctl.sh next
+click-right = ~/.config/polybar/polybar-scripts/player-ctl.sh previous
+click-middle = ~/.config/polybar/polybar-scripts/player-ctl.sh play-pause
 
 [module/filesystem]
 type = internal/fs
@@ -461,7 +461,7 @@ menu-2-1-exec = menu-open-0
 
 [module/updates-arch-combined]
 type = custom/script
-exec = ~/polybar-scripts/updates-arch-combined.sh
+exec = ~/.config/polybar/polybar-scripts/updates-arch-combined.sh
 interval = 600
 format-underline = ${colors.primary}
 ; vim:ft=dosini
