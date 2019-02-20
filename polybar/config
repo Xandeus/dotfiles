@@ -56,7 +56,7 @@ tray-position = left
 tray-padding = 1
 tray-maxsize = 12
 tray-offset- = 10
-tray-background = #55000000
+tray-background = ${root.background}
 ;tray-transparent = true
 
 scroll-up = i3wm-wsnext
@@ -64,6 +64,7 @@ scroll-down = i3wm-wsprev
 
 bottom = false
 override-redirect = true
+vm-restack = i3
 
 [module/change-wallpaper]
 type = custom/script
