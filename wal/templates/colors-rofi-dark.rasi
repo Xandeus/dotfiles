@@ -9,10 +9,11 @@ configuration {{
 	display-window:  "Window";
 	show-icons:      true;
 	sidebar-mode:    true;
+    yoffset:         30;
 }}
 
 * {{
-    background-color:            #{background.strip}77;
+    background-color:            #{background.strip}29;
     text-color:                  #{color7.strip}55;
 	selbg:                       {color4};
 	actbg:                       #{color10.strip}99;

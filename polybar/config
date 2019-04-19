@@ -18,19 +18,19 @@ margin-bottom = 0
 screenchange-reload = true
 
 [bar/mybar]
-width = 60%
-height = 26
-offset-x = 20%
-offset-y = 5
+width = 100%
+height = 30
+offset-x = 0
+offset-y = 0
 enable-ipc = true
 ;${colors.background}
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-overline-size = 4
+overline-size = 5
 overline-color = ${colors.primary}
-underline-size = 3
+underline-size = 5
 underline-color = ${colors.primary}
 
 border-bottom-color = ${colors.secondary}
@@ -41,21 +41,18 @@ module-margin-right = 5
 
 ;font-0 = Font Awesome 5 Free:style=Regular:pixelsize=8;1
 ;font-0 = Font Awesome 5 Free:size=8:style=Bold;
-font-0 = Roboto :size=10::style=Medium;0
-font-1 = Font Awesome 5 Free:size=8:style=Solid;0
-font-2 = Font Awesome 5 Brands:size=8:style=Regular;1
-font-4 = siji:pixelsize=10;0
-font-5 = FontAwesome:size=12;0
-font-6 = Material Icons:size=12
+font-0 = Roboto :size=10::style=Medium;3
+font-1 = siji:pixelsize=10;3
+font-2 = Material Design Icons:size=14;3
 
-modules-left = i3 player-mpris-tail network 
+modules-left = i3 player-mpris-tail taskwarrior
 modules-center = date 
-modules-right = change-wallpaper filesystem battery updates-arch-combined 
+modules-right = change-wallpaper openweathermap-fullfeatured info-hackspeed filesystem cpu temperature updates-arch-combined battery 
 spacing = 0
 tray-position = left 
 tray-padding = 1
 tray-maxsize = 12
-tray-offset- = 10
+tray-offset- = 0
 tray-background = ${root.background}
 ;tray-transparent = true
 
@@ -63,14 +60,25 @@ scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
 
 bottom = false
-override-redirect = true
+override-redirect = false 
 vm-restack = i3
 
 [module/change-wallpaper]
 type = custom/script
 exec = echo $(basename "$(cat ~/.fehbg)") | tr -d "'"
 click-left = wal -a "85" -i $HOME/Dropbox/Photos/Wallpapers/ 
-format-underline = ${colors.primary}
+
+format-overline = ${colors.secondary}
+
+[module/taskwarrior]
+interval = 30
+type = custom/script
+exec = ~/.config/polybar/polybar-scripts/task_polybar.sh
+
+format = <label>
+format-prefix = " "
+click-left = task "$((`cat /tmp/tw_polybar_id`))" done
+format-overline = ${colors.secondary}
 
 [module/backlight]
 type = internal/backlight
@@ -85,14 +93,14 @@ ramp-foreground = #66c6b8e6
 type = internal/network
 interface = wlp2s0
 interval = 3.0
-format-connected-underline = ${colors.primary}
-format-disconnected-connected-underline = ${colors.primary}
+format-connected-overline = ${colors.primary}
+format-disconnected-connected-overline = ${colors.primary}
 format-connected-padding = 1
 format-disconnected-padding = 1
 
 format-connected = <label-connected>
 
-label-connected = %{A1:nm-connection-editor:} %essid%  %upspeed% %downspeed%%{A}
+label-connected = %{A1:nm-connection-editor:} %essid%%{A}
 label-disconnected = %{A1:nm-connection-editor:}  %{A}
 label-disconnected-foreground = ${colors.secondary}
 
@@ -148,23 +156,31 @@ menu-2-1-exec = scrot &
 menu-3-0 = Gvim
 menu-3-0-exec = gvim &
 
+[module/gmail]
+type = custom/script
+exec = ~/.config/polybar/gmail/launch.py
+tail = true
+click-left = xdg-open https://mail.google.com
+
 [module/player-mpris-tail]
 type = custom/script
-exec = ~/.config/polybar/polybar-scripts/player-mpris-tail.py
+exec = ~/.config/polybar/polybar-scripts/player-mpris-tail.py -f '{icon} {title} - {artist}' --icon-playing ""
 tail = true
+label = %output%
 click-left = ~/.config/polybar/polybar-scripts/player-ctl.sh next
 click-right = ~/.config/polybar/polybar-scripts/player-ctl.sh previous
 click-middle = ~/.config/polybar/polybar-scripts/player-ctl.sh play-pause
+format-overline = ${colors.secondary}
 
 [module/filesystem]
 type = internal/fs
 interval = 0.5
 mount-0 = /
-format-underline = ${colors.primary}
 
-label-mounted =  %percentage_free%%
+label-mounted =  %percentage_free%%
 label-unmounted = %mountpoint%: not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
+format-overline = ${colors.secondary}
 
 [module/i3]
 
@@ -201,37 +217,38 @@ label-focused-padding = 2
 label-unfocused = %index%
 label-urgent-padding = 1
 
-label-dimmed-underline = ${colors.light}
-label-focused-underline = $(colors.light)
+label-dimmed-overline = ${colors.light}
+label-focused-overline = $(colors.light)
 
 [module/cpu]
 type = internal/cpu
 interval = 0.5
 
 format = <label> <ramp-coreload>
-font-1 = Unifont:size=5;-3
-
-label = CPU
+label =  %percentage%%
 ;label-font = 3
 ;label-foreground = #0088CC
 
+rampe-coreload-spacing = 1
 ramp-coreload-0 = ▁
-ramp-coreload-0-font = 4
-ramp-coreload-0-foreground = #0088CC
 ramp-coreload-1 = ▂
-ramp-coreload-1-font = 4
-ramp-coreload-1-foreground = #0088CC
 ramp-coreload-2 = ▃
-ramp-coreload-2-font = 4
-ramp-coreload-2-foreground = #0088CC
 ramp-coreload-3 = ▄
-ramp-coreload-3-font = 4
-ramp-coreload-3-foreground = #0088CC
+
+[module/openweathermap-fullfeatured]
+type = custom/script
+exec = ~/.config/polybar/polybar-scripts/openweathermap-fullfeatured.sh
+interval = 600
+
+[module/info-hackspeed]
+type = custom/script
+exec = ~/.config/polybar/polybar-scripts/info-hackspeed.sh
+tail = true
 
 [module/memory]
 type = internal/memory
 format = <label> <bar-used>
-format-underline = ${colors.primary}
+format-overline = ${colors.primary}
 label = RAM [%gb_used%] 
 ;label-foreground = #0088CC
 
@@ -280,7 +297,7 @@ bar-progress-empty-font = 3
 type = internal/date
 interval = 0.5
 
-date = " %Y/%m/%d" 
+date = "ﷻ %Y/%m/%d" 
 date-alt = " %d/%m/%Y |"
 
 time = %H:%M:%S
@@ -288,7 +305,7 @@ time-alt = %H:%M:%S
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground}
-format-underline = ${colors.primary}
+format-overline = ${colors.primary}
 
 label = %date% %time%
 
@@ -379,28 +396,28 @@ label-charging = %percentage%%
 ;   %percentage% (default)
 ;   %time%
 ;   %consumption% (shows current discharge rate in watts)
-label-discharging = %time% %percentage%%
+label-discharging =  %percentage%% %time%
 
 ; Available tokens:
 ;   %percentage% (default)
-label-full = 
+label-full = 
 
 ; Only applies if <ramp-capacity> is used
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
 
 ; Only applies if <bar-capacity> is used
 bar-capacity-width = 10
 
 ; Only applies if <animation-charging> is used
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
 ; Framerate in milliseconds
 animation-charging-framerate = 750
 
@@ -423,7 +440,7 @@ format-underline = #0088CC
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
-label =   %temperature%
+label = %temperature-c%
 labeil-foreground = #0088CC
 label-warn = %temperature%
 label-warn-foreground = ${colors.secondary}
@@ -464,5 +481,4 @@ menu-2-1-exec = menu-open-0
 type = custom/script
 exec = ~/.config/polybar/polybar-scripts/updates-arch-combined.sh
 interval = 600
-format-underline = ${colors.primary}
 ; vim:ft=dosini
