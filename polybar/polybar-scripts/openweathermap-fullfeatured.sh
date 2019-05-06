@@ -6,7 +6,7 @@ get_icon() {
         01n) icon="";; #Clear sky night
         02d) icon="";; #Few clouds
         02n) icon="";;
-        03*) icon="";; #Scattered clouds
+        03*) icon="";; #Scattered clouds
         04*) icon="";; #Broken clouds
         09d) icon="";; #Shower rain
         09n) icon="";;
@@ -18,7 +18,7 @@ get_icon() {
         13n) icon="";;
         50d) icon="";; #Mist
         50n) icon="";;
-        *) icon="";
+        *) icon="17";
     esac
 
     echo $icon
@@ -88,7 +88,7 @@ if [ -n "$current" ] && [ -n "$forecast" ]; then
     elif [ "$sun_set" -gt "$now" ]; then
         daytime=" $(get_duration "$((sun_set-now))")"
     else
-        daytime=" $(get_duration "$((sun_rise-now))")"
+        daytime=" $(get_duration "$((sun_rise-now))")"
     fi
     echo "$(get_icon "$current_icon") $current_temp$SYMBOL $daytime"
     #echo "$(get_icon "$current_icon") $current_temp$SYMBOL  $trend  $(get_icon "$forecast_icon") $forecast_temp$SYMBOL   $daytime"

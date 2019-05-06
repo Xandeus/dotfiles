@@ -28,30 +28,31 @@ enable-ipc = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-overline-size = 5
+overline-size = 4
 overline-color = ${colors.primary}
 underline-size = 5
 underline-color = ${colors.primary}
 
-border-bottom-color = ${colors.secondary}
-padding-left = 10
-padding-right = 10
-module-margin-left = 0
-module-margin-right = 5
+border-size = 1
+border-color = ${colors.secondary}
+padding-left = 0
+padding-right = 2
+module-margin-left = 2
+module-margin-right = 2
 
 ;font-0 = Font Awesome 5 Free:style=Regular:pixelsize=8;1
 ;font-0 = Font Awesome 5 Free:size=8:style=Bold;
 font-0 = Roboto :size=10::style=Medium;3
-font-1 = siji:pixelsize=10;3
-font-2 = Material Design Icons:size=14;3
+font-1 = Material Design Icons:size=14;3
+font-2 = Siji:pixelsize=10;1
 
 modules-left = i3 player-mpris-tail taskwarrior
 modules-center = date 
-modules-right = change-wallpaper openweathermap-fullfeatured info-hackspeed filesystem cpu temperature updates-arch-combined battery 
+modules-right = change-wallpaper openweathermap-fullfeatured filesystem temperature updates-arch-combined battery 
 spacing = 0
 tray-position = left 
 tray-padding = 1
-tray-maxsize = 12
+tray-maxsize = 14
 tray-offset- = 0
 tray-background = ${root.background}
 ;tray-transparent = true
@@ -65,10 +66,10 @@ vm-restack = i3
 
 [module/change-wallpaper]
 type = custom/script
-exec = echo $(basename "$(cat ~/.fehbg)") | tr -d "'"
+exec = echo 掠 $(basename "$(cat ~/.fehbg)") | tr -d "'"
 click-left = wal -a "85" -i $HOME/Dropbox/Photos/Wallpapers/ 
 
-format-overline = ${colors.secondary}
+format-overline = ${colors.primary}
 
 [module/taskwarrior]
 interval = 30
@@ -78,7 +79,7 @@ exec = ~/.config/polybar/polybar-scripts/task_polybar.sh
 format = <label>
 format-prefix = " "
 click-left = task "$((`cat /tmp/tw_polybar_id`))" done
-format-overline = ${colors.secondary}
+format-overline = ${colors.primary}
 
 [module/backlight]
 type = internal/backlight
@@ -164,22 +165,35 @@ click-left = xdg-open https://mail.google.com
 
 [module/player-mpris-tail]
 type = custom/script
-exec = ~/.config/polybar/polybar-scripts/player-mpris-tail.py -f '{icon} {title} - {artist}' --icon-playing ""
+exec = ~/.config/polybar/polybar-scripts/player-mpris-tail.py -f '{icon} {title} - {artist}' --icon-playing "" --icon-paused "" --icon-none "" 
 tail = true
 label = %output%
 click-left = ~/.config/polybar/polybar-scripts/player-ctl.sh next
 click-right = ~/.config/polybar/polybar-scripts/player-ctl.sh previous
 click-middle = ~/.config/polybar/polybar-scripts/player-ctl.sh play-pause
-format-overline = ${colors.secondary}
+format-overline = ${colors.primary}
 
 [module/filesystem]
 type = internal/fs
 interval = 0.5
 mount-0 = /
 
-label-mounted =  %percentage_free%%
+bar-used-format = %fill%%indicator%%empty%
+bar-used-width = 10
+bar-used-gradient = true
+bar-used-foreground-0 = ${colors.primary}
+bar-used-foreground-1 = ${colors.secondary}
+bar-used-foreground-2 = ${colors.light}
+
+; The fill, indicator and empty icon can be configured like any <label>
+bar-used-fill = █
+bar-used-indicator = █
+bar-used-empty = █
+
+label-mounted =  %percentage_used%% 
 label-unmounted = %mountpoint%: not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
+format-mounted = <label-mounted> 
 format-overline = ${colors.secondary}
 
 [module/i3]
@@ -297,13 +311,13 @@ bar-progress-empty-font = 3
 type = internal/date
 interval = 0.5
 
-date = "ﷻ %Y/%m/%d" 
-date-alt = " %d/%m/%Y |"
+date = " %Y/%m/%d" 
+date-alt = " %d/%m/%Y |"
 
 time = %H:%M:%S
 time-alt = %H:%M:%S
 
-format-prefix = 
+format-prefix = ﷻ
 format-prefix-foreground = ${colors.foreground}
 format-overline = ${colors.primary}
 
@@ -417,7 +431,7 @@ animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-2 = 
 animation-charging-3 = 
-animation-charging-4 = 
+animation-charging-4 = 
 ; Framerate in milliseconds
 animation-charging-framerate = 750
 
@@ -436,19 +450,18 @@ thermal-zone = 0
 warn-temperature = 60
 
 format = <ramp> <label>
-format-underline = #0088CC
 format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
 
-label = %temperature-c%
-labeil-foreground = #0088CC
-label-warn = %temperature%
-label-warn-foreground = ${colors.secondary}
+label =%temperature-c%
+labeil-foreground = ${colors.foreground}
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.foreground}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
+ramp-0 = 
+ramp-1 = 
+ramp-2 =  
+ramp-3 = 
+ramp-foreground = ${colors.foreground}
 
 [module/powermenu]
 type = custom/menu
