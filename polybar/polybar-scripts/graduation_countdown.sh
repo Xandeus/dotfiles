@@ -7,4 +7,4 @@ diff=$(($grad_date-$datum2))
 
 days=$(($diff/(60*60*24)))
 
-echo  $diff
+echo  $diff | sed ':a;s/\B[0-9]\{3\}\>/,&/;ta'
