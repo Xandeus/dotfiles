@@ -230,7 +230,6 @@ exec --no-startup-id redshift -l 44:-93
 exec --no-startup-id $HOME/.config/i3/cycle_wallpaper.sh 
 exec --no-startup-id xss-lock -- $HOME/betterlockscreen/betterlockscreen -l dim &
 exec --no-startup-id exec $HOME/betterlockscreen/betterlockscreen -u ~/Dropbox/Photos/Lockscreen_Photos/ &
-for_window [class="Spotify"] floating enable
 for_window [class="Gimp"] floating enable
 for_window [class="Playground"] floating enable
 for_window [class="Matplotlib"] floating enable
