@@ -1,6 +1,6 @@
 #!/bin/bash
 
-grad_date=$(date -d "2019-12-17" "+%s")
+grad_date=$(date -d "2019-12-17T10:00:00" "+%s")
 datum2=$(date "+%s")
 
 diff=$(($grad_date-$datum2))

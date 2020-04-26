@@ -33,7 +33,7 @@ overline-color = ${colors.primary}
 underline-size = 5
 underline-color = ${colors.primary}
 
-border-size = 1
+border-size = 0
 border-color = ${colors.secondary}
 padding-left = 0
 padding-right = 2
@@ -46,7 +46,7 @@ font-0 = Roboto :size=10::style=Medium;3
 font-1 = Material Design Icons:size=14;3
 font-2 = Siji:pixelsize=10;1
 
-modules-left = i3 player-mpris-tail taskwarrior countdown
+modules-left = i3 player-mpris-tail taskwarrior 
 modules-center = date 
 modules-right = change-wallpaper openweathermap-fullfeatured filesystem temperature updates-arch-combined battery 
 spacing = 0
