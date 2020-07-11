@@ -230,6 +230,7 @@ for_window [class="^.*" tiling] border pixel 2
 gaps inner 10
 gaps outer 5
 
+
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # exec --no-startup-id $HOME/betterlockscreen/betterlockscreen -u ~/.fehbg &
 exec --no-startup-id nm-applet &
@@ -238,7 +239,7 @@ exec --no-startup-id dropbox &
 exec --no-startup-id udiskie &
 exec --no-startup-id xrandr --auto &
 exec --no-startup-id unclutter &
-exec --no-startup-id compton &
+exec --no-startup-id picom &
 exec --no-startup-id xbindkeys &
 exec --no-startup-id redshift -l 44:-93
 exec --no-startup-id $HOME/.config/i3/cycle_wallpaper.sh 
